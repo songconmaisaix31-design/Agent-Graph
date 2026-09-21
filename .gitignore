@@ -16,6 +16,7 @@ src/**/*.d.ts
 !src/types/build-constants.d.ts
 
 # Dependencies
+/.agent-graph/
 node_modules/
 # Why: the trailing-slash form matches directories only, so a node_modules SYMLINK (how agent
 # worktrees share an install) slipped past a bulk `git add` and got committed — twice.

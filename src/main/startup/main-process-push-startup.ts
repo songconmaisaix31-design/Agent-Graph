@@ -10,6 +10,9 @@ import { mainProcessState as state } from './main-process-state'
 // modes have already stored it there; threading it as a parameter would push the
 // launch module past its line budget for no gain.
 export function startDesktopPushService(runtimeRpc: OrcaRuntimeRpcServer): void {
+  if (process.env.AGENT_GRAPH_HOME_DIR) {
+    return
+  }
   const runtime: OrcaRuntimeService | null = state.runtime
   if (!runtime) {
     console.warn('[push] Background push startup skipped: runtime not started')

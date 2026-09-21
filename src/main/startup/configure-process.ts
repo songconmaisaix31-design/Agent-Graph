@@ -188,6 +188,16 @@ export function patchPackagedProcessPath(): void {
 }
 
 export function configureDevUserDataPath(isDev: boolean): void {
+  const projectHome = process.env.AGENT_GRAPH_HOME_DIR
+  if (projectHome) {
+    const projectData = process.env.ORCA_DEV_USER_DATA_PATH
+    if (!isDev || !projectData || !areSameE2EHomePath(homedir(), projectHome)) {
+      throw new Error('Refusing to start Agent Graph outside its isolated development home')
+    }
+    app.setPath('home', projectHome)
+    app.setPath('userData', projectData)
+    return
+  }
   const e2eConfig = getMainE2EConfig()
   if (e2eConfig.userDataDir) {
     // Why: the E2E suite launches a fresh Electron app for each spec. A

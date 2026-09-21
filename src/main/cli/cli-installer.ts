@@ -102,6 +102,11 @@ export class CliInstaller extends CliPathRegistration {
   }
 
   async install(): Promise<CliInstallStatus> {
+    if (process.env.AGENT_GRAPH_HOME_DIR) {
+      throw new Error(
+        'Agent Graph uses worktree-local CLI wrappers; global registration is disabled.'
+      )
+    }
     return this.runAppImageRegistrationOperation(() => this.installUnlocked())
   }
 
@@ -159,6 +164,9 @@ export class CliInstaller extends CliPathRegistration {
   }
 
   async remove(): Promise<CliInstallStatus> {
+    if (process.env.AGENT_GRAPH_HOME_DIR) {
+      throw new Error('Agent Graph cannot remove a global Orca CLI registration.')
+    }
     return this.runAppImageRegistrationOperation(() => this.removeUnlocked())
   }
 

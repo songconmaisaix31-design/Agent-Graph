@@ -253,6 +253,48 @@ describe('patchPackagedProcessPath', () => {
 })
 
 describe('configureDevUserDataPath', () => {
+  afterEach(() => vi.unstubAllEnvs())
+
+  it('binds Agent Graph Electron paths to its isolated Node home', async () => {
+    const { app } = await import('electron')
+    const { configureDevUserDataPath } = await import('./configure-process')
+    const projectHome = join(tmpdir(), 'agent-graph-home-fixture')
+    const projectData = join(tmpdir(), 'agent-graph-data-fixture')
+    vi.stubEnv('AGENT_GRAPH_HOME_DIR', projectHome)
+    vi.stubEnv('HOME', projectHome)
+    vi.stubEnv('USERPROFILE', projectHome)
+    vi.stubEnv('ORCA_DEV_USER_DATA_PATH', projectData)
+    vi.mocked(app.setPath).mockClear()
+
+    configureDevUserDataPath(true)
+
+    expect(app.setPath).toHaveBeenCalledWith('home', projectHome)
+    expect(app.setPath).toHaveBeenCalledWith('userData', projectData)
+  })
+
+  it('refuses an Agent Graph launch with a foreign home before setting paths', async () => {
+    const { app } = await import('electron')
+    const { configureDevUserDataPath } = await import('./configure-process')
+    vi.stubEnv('AGENT_GRAPH_HOME_DIR', join(homedir(), 'different-home'))
+    vi.stubEnv('ORCA_DEV_USER_DATA_PATH', join(tmpdir(), 'agent-graph-data-fixture'))
+    vi.mocked(app.setPath).mockClear()
+
+    expect(() => configureDevUserDataPath(true)).toThrow(/Agent Graph/)
+    expect(app.setPath).not.toHaveBeenCalled()
+  })
+
+  it('refuses incomplete or packaged Agent Graph dev profiles', async () => {
+    const { app } = await import('electron')
+    const { configureDevUserDataPath } = await import('./configure-process')
+    vi.stubEnv('AGENT_GRAPH_HOME_DIR', homedir())
+    vi.stubEnv('ORCA_DEV_USER_DATA_PATH', undefined)
+    vi.mocked(app.setPath).mockClear()
+    expect(() => configureDevUserDataPath(true)).toThrow(/Agent Graph/)
+    vi.stubEnv('ORCA_DEV_USER_DATA_PATH', join(tmpdir(), 'agent-graph-data-fixture'))
+    expect(() => configureDevUserDataPath(false)).toThrow(/Agent Graph/)
+    expect(app.setPath).not.toHaveBeenCalled()
+  })
+
   it('forces Electron home into the disposable E2E profile', async () => {
     const { app } = await import('electron')
     const { configureDevUserDataPath } = await import('./configure-process')
@@ -340,16 +382,16 @@ describe('configureDevUserDataPath', () => {
     expect(app.setPath).toHaveBeenCalledWith('userData', '/tmp/orca-dev-repro')
   })
 
-  it('moves dev runs onto an orca-dev userData path', async () => {
+  it('moves dev runs onto an agent-graph-dev userData path', async () => {
     const { app } = await import('electron')
     const { configureDevUserDataPath } = await import('./configure-process')
 
     delete process.env.ORCA_DEV_USER_DATA_PATH
     configureDevUserDataPath(true)
 
-    // Why: production code uses path.join(app.getPath('appData'), 'orca-dev')
+    // Why: production code uses path.join(app.getPath('appData'), 'agent-graph-dev')
     // which produces platform-specific separators.
-    expect(app.setPath).toHaveBeenCalledWith('userData', join('/tmp/app-data', 'orca-dev'))
+    expect(app.setPath).toHaveBeenCalledWith('userData', join('/tmp/app-data', 'agent-graph-dev'))
   })
 
   it('leaves packaged runs on the default userData path', async () => {

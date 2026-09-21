@@ -1,10 +1,15 @@
 # 当前进度
 
-仅在目标仓库没有 STATUS.md 时创建；已有进度必须合并，不得覆盖。
-
-- 基线/环境：上游 ORCA v1.4.206 @ c62eca3988ce4d7fce12fbfd20c0c47b39e9ecac 已从 GitHub 固定提交归档导入；只读基线 worktree 为 `C:\Users\DW\orca\Agent-Graph-baseline-v1.4.206`（本地导入提交待记录），开发 worktree 为 `C:\Users\DW\orca\Agent-Graph-app` / `init/project-isolation`。实际 Node 为 v24.16.0；pnpm 12.0.0 正由 Corepack 准备，未安装项目依赖。
-- 本轮目标/负责人/写域：建立隔离基座与 Agent Graph 运行身份；写域为应用身份、开发启动入口和本状态文件。
-- 已完成/提交：已保留原始基线并创建独立开发 worktree；已将打包 ID、产品名、协议、Windows 可执行文件及开发 profile 与上游 Orca 分离。提交待本轮验证后创建。
-- 验证：归档完整性 PASS（29,094 条目；SHA-256 `3BDEF1393226C42D0B4714F678CF548B6CFFBC864DD25F1717ACCB032686598F`）。构建、启动、打包及功能回归均 NOT_RUN；不得据此宣称功能可用。
-- 阻塞：上游 Git fetch 在此环境的对象流卡住，故使用同一固定提交的 GitHub 归档；导入后的本地 Git 提交不等同于上游 SHA。首次隔离启动仍依赖项目依赖安装。
-- 下一步：完成专用开发启动器与静态隔离检查；经确认的依赖安装后，以独立 profile 做首次后台启动并记录结果。
+- 基线与工作树：上游 ORCA v1.4.206 @ `c62eca3988ce4d7fce12fbfd20c0c47b39e9ecac` 来自固定提交归档；本地导入提交为 `81e4b3cae6f9be79fcd235b3398d6f1b45f966eb`，不等同上游 Git 历史。基线 `C:\Users\DW\orca\Agent-Graph-baseline-v1.4.206` / `upstream-baseline/v1.4.206` 仅作只读参考，检查 clean。开发目录 `C:\Users\DW\orca\Agent-Graph-app` / `init/project-isolation`。Node v24.16.0、pnpm 12.0.0，保留原锁文件和原生补丁。归档完整性已 PASS（29,094 条目；SHA-256 `3BDEF1393226C42D0B4714F678CF548B6CFFBC864DD25F1717ACCB032686598F`）。
+- 本轮目标/负责人/写域：主 Agent 完成安装与独立 dev profile 的静态检查，另一 Agent 只读复核。改动限开发入口/环境、启动路径/端口/push、CLI 注册防护、针对性测试及控制文档。验收为用户指定的安装 → 隔离 → Electron → 测试 repo → Terminal/Agent/Worktree → 退出/重启；停止点为需要系统级工具链安装许可，不跳过原生模块守卫。
+- 完成和提交：初始化提交 `4d2df57566ca3d27c88b06cf8559fd4c10f0c857` 和基线已推送 `https://github.com/songconmaisaix31-design/Agent-Graph`。本次加固使用工作树内 `.agent-graph/dev/{home,user-data}`、私有 `.pnpm-store`；清理继承的 Orca 路由、provider 数据根和已知凭据变量；强制后台启动/独立实例锁、运行时随机端口；关闭遥测、诊断及上游 push；禁止全局 Windows/WSL CLI 注册变更。`dev`、`dev:agent-graph`、`dev-stable-name` 均使用专用入口；`start` 明确拒绝尚未验证的 built preview。未复制日常 Orca 凭据或原生二进制，未启动或停止日常 Orca。最新加固提交见本分支 Git log。
+- 验证证据（2026-09-21）：
+  - FAIL：`pnpm install --frozen-lockfile --store-dir .pnpm-store --state-dir tmp/agent-graph-validation/pnpm-state --reporter append-only`。`native/windows-registry` 的 node-gyp 报 `Could not find any Visual Studio installation to use`，exit 1；日志 `tmp/agent-graph-validation/install.log`。
+  - PASS，仅恢复静态检查依赖：相同安装命令另加 `--ignore-scripts --offline`，1283 包复用、exit 0。跳过脚本不等于完整安装成功。日志 `tmp/agent-graph-validation/restore-dependencies.log`。
+  - PASS：`node config/scripts/agent-graph-dev.mjs --check-isolation`；路径均位于开发 worktree。真实 Node 子进程 HOME/TEMP 边界、junction 拒绝、provider 覆盖清理和重启路径稳定性由单元测试覆盖，不是 Electron 运行期访问证明。
+  - PASS：`node node_modules/vitest/vitest.mjs run --config config/vitest.config.ts config/scripts/agent-graph-environment.test.mjs src/main/startup/dev-instance-identity.test.ts src/main/startup/configure-process.test.ts src/main/startup/single-instance-lock.test.ts src/main/cli/cli-installer-agent-graph.test.ts src/main/startup/main-process-push-startup.test.ts src/shared/child-process/child-process-import-boundary.test.ts src/shared/child-process/windows-console-visibility.test.ts --maxWorkers=2`：8 文件 / 86 测试，exit 0；日志 `tmp/agent-graph-validation/isolation-tests.log`。
+  - PASS：`node node_modules/typescript/bin/tsc --noEmit --composite false -p config/tsconfig.node.json`；`node config/scripts/check-changed-code-quality.mjs 4d2df57566ca3d27c88b06cf8559fd4c10f0c857`（新增问题 0）；`git diff --check`；`pnpm store path` 指向工作树内存储。相关日志位于 `tmp/agent-graph-validation/`，不提交运行数据。
+  - 独立复核：provider 根路径、WSL CLI 和旁路启动入口问题已关闭；专项测试独立执行通过。结论仅适用于全新 profile、支持的 dev 入口之代码/单元证据。
+  - BLOCKED / NOT_RUN：完整安装、Electron 启动、运行期不访问日常 Orca 数据、打开测试 repo、Terminal/Agent/Worktree smoke、退出及重启状态验证、完整构建/打包。没有运行截图，不宣称功能或运行态隔离完成。
+- 阻塞：本机未检测到 Visual Studio C++ 构建工具；安装属于系统级变更，待用户许可。已跳过安装脚本的 node_modules 不可用来宣称 Electron 原生运行环境就绪。独立 profile 不继承登录；真实 Agent/provider 验证还需在项目 profile 单独授权，不能拿 fixture 代替。
+- 下一步：获准后安装 C++ Build Tools，重新完整 frozen install；仅从专用 dev 入口后台启动，依次执行受控测试 repo 的 smoke 和同 profile 重启验证。built preview、打包身份及其他高级/远程功能仍另行验收；此配置隔离不是 OS 文件访问沙箱。

@@ -15,7 +15,12 @@ import {
   quoteShell
 } from './wsl-cli-scripts'
 import { buildWslCliInstallCommand } from './wsl-cli-registration-command'
-import { buildWslCliStatus, readWslCliCommandFile, resolveReadyWslCliState } from './wsl-cli-status'
+import {
+  buildWslCliStatus,
+  readWslCliCommandFile,
+  resolveReadyWslCliState,
+  unsupportedWslCliStatus
+} from './wsl-cli-status'
 
 const MANAGED_MARKER = getWslLauncherMarker()
 const BRIDGE_MANAGED_MARKER = getWslBridgeMarker()
@@ -57,6 +62,12 @@ export class WslCliInstaller {
   }
 
   async getStatus(): Promise<CliInstallStatus> {
+    if (process.env.AGENT_GRAPH_HOME_DIR) {
+      return unsupportedWslCliStatus(
+        'launch_mode_unavailable',
+        'Agent Graph dev profiles do not register or modify WSL Orca commands.'
+      )
+    }
     const ready = await resolveReadyWslCliState({
       platform: this.platform,
       distro: this.distro,
@@ -200,6 +211,9 @@ export class WslCliInstaller {
   }
 
   async install(precomputedStatus?: CliInstallStatus): Promise<CliInstallStatus> {
+    if (process.env.AGENT_GRAPH_HOME_DIR) {
+      throw new Error('Agent Graph cannot install a global WSL Orca command.')
+    }
     // Why: repair passes its fresh probe; re-probing here would double every
     // WSL round trip on the startup reconciliation path.
     const status = precomputedStatus ?? (await this.getStatus())
