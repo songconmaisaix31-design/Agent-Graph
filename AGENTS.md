@@ -1,3 +1,7 @@
+# Agent Graph Project Controls
+
+Read [`AGENT_GRAPH.md`](./AGENT_GRAPH.md) and [`STATUS.md`](./STATUS.md) before project work. The `Agent-Graph-baseline-v1.4.206` worktree is an imported, read-only upstream reference; all modifications belong in this worktree or a descendant worktree. Use `pnpm run dev:agent-graph` for a local launch so development data remains under the Agent Graph profile. Do not install, register, or invoke a global `orca` command while this compatibility rename is incomplete.
+
 # Design System
 
 All UI work — layout, color, typography, spacing, component selection, UX behavior — must follow [`docs/STYLEGUIDE.md`](./docs/STYLEGUIDE.md). Most of it is linted: `pnpm run check:code-quality:changed` fails on new restyles of a `components/ui/` primitive, raw palette colors, and computed `className` strings; `pnpm lint` fails on any class Tailwind cannot generate. See the Enforcement section of the style guide before suppressing either. Use the tokens defined in `src/renderer/src/assets/main.css` (the canonical source) and the shadcn primitives in `src/renderer/src/components/ui/`. Don't invent new color values, font sizes, or shadow tiers when a documented one already covers the role. When STYLEGUIDE.md is silent, follow the resolution order in its final section.
