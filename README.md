@@ -1,272 +1,167 @@
-<h1 align="center">
-  <a href="https://onOrca.dev"><img src="resources/build/icon.png" alt="Orca" width="64" valign="middle" /></a> Orca
-</h1>
+<div align="center">
 
-<p align="center">
-  <a href="https://github.com/stablyai/orca"><img src="https://img.shields.io/github/stars/stablyai/orca?style=flat&amp;label=%E2%98%85&amp;color=08C" alt="GitHub stars" /></a>
-  <a href="https://github.com/stablyai/orca/releases"><img src="docs/assets/readme-downloads.svg" alt="Total downloads across all releases" /></a>
-  <img src="https://img.shields.io/badge/license-MIT-08C?style=flat" alt="License: MIT" />
-  <a href="https://discord.gg/fzjDKHxv8Q"><img src="https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=white" alt="Join the Orca Discord" /></a>
-  <a href="https://x.com/orca_build"><img src="https://img.shields.io/badge/X-000000?logo=x&logoColor=white" alt="Follow Orca on X" /></a>
-  <img src="https://img.shields.io/badge/macOS%20%7C%20Windows%20%7C%20Linux-4493F8?style=flat-square" alt="Supported platforms: macOS, Windows, and Linux" />
-</p>
+# Agent Graph
 
-<p align="center">
-  <sub><a href="docs/readme/README.zh-CN.md">中文</a> · <a href="docs/readme/README.ja.md">日本語</a> · <a href="docs/readme/README.ko.md">한국어</a> · <a href="docs/readme/README.es.md">Español</a> · <a href="docs/readme/README.fr.md">Français</a> · <a href="docs/readme/README.pt.md">Português</a></sub>
-</p>
+A rework of Orca v1.4.206 — new brand, new interface, then graph-shaped agent workflows. Right now it is at step 1 of 5.
 
-<p align="center">
-  <strong>The AI Orchestrator for 100x builders.</strong><br/>
-  Run Codex, ClaudeCode, OpenCode or Pi side-by-side — each in its own worktree, tracked in one place.
-</p>
+基于 Orca v1.4.206 的二开：换品牌、重构界面，再做带 Graph 的 Agent 工作流。目前在第 1 步（共 5 步）。
 
-<h3 align="center"><a href="https://onorca.dev/download"><ins>Download Orca</ins></a></h3>
+[![License](https://img.shields.io/badge/license-MIT-08C.svg)](LICENSE)
+[![Baseline](https://img.shields.io/badge/orca-v1.4.206-blue.svg)](package.json)
+[![Node](https://img.shields.io/badge/node-24-5FA04E.svg)](package.json)
+[![CI](https://github.com/songconmaisaix31-design/Agent-Graph/actions/workflows/pr.yml/badge.svg)](https://github.com/songconmaisaix31-design/Agent-Graph/actions/workflows/pr.yml)
 
-<p align="center">
-  <img src="docs/assets/readme-hero.jpg" alt="Orca desktop app running agents in parallel worktrees, with the Orca mobile companion app in the corner" width="960" />
-</p>
+<img src="docs/assets/readme-hero.jpg" width="880" alt="The upstream Orca desktop app — the interface this rework starts from" />
 
-## Features
+<sub>This is the upstream Orca screenshot shipped in the tree, not the reworked interface. No Agent Graph screenshot exists yet.<br/>这张图是树内自带的上游 Orca 截图，不是重构后的界面。目前没有 Agent Graph 的截图。</sub>
 
-<table>
-<tr>
-<td width="50%" valign="middle">
+</div>
 
-### Mobile Companion
-
-Monitor and steer your agents from your phone — get notified when an agent finishes and send follow-ups from anywhere.
-
-[iOS App Store](https://apps.apple.com/us/app/orca-ide/id6766130217) · [TestFlight](https://testflight.apple.com/join/YjeGMQBA) · [Android APK 0.0.50](https://github.com/stablyai/orca/releases/download/mobile-android-v0.0.50/app-release.apk) · [Docs →](https://www.onorca.dev/docs/mobile)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/mobile"><picture><source srcset="docs/assets/feature-wall/mobile-companion-app-showcase.gif" type="image/gif"><img src="docs/assets/feature-wall/mobile-companion-app-showcase.jpg" alt="Orca desktop with the mobile companion app" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Parallel Worktrees
-
-Fan one prompt across five agents, each in its own isolated git worktree — compare the results and merge the winner.
-
-[Docs →](https://www.onorca.dev/docs/model/worktrees)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/model/worktrees"><picture><source srcset="docs/site/public/docs/tab-split.gif" type="image/gif"><img src="docs/site/public/docs/posters/tab-split.jpg" alt="Parallel worktree orchestration" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Terminal Splits
-
-Ghostty-class terminals with WebGL rendering, infinite splits, and scrollback that survives restarts.
-
-[Docs →](https://www.onorca.dev/docs/terminal)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/terminal"><picture><source srcset="resources/onboarding/feature-wall/tile-02.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-02.poster.jpg" alt="Terminal splits" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Design Mode
-
-Click any UI element in a real Chromium window to send its HTML, CSS, and a cropped screenshot straight into your agent's prompt.
-
-[Docs →](https://www.onorca.dev/docs/browser/design-mode)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/browser/design-mode"><picture><source srcset="docs/site/public/docs/orca-design-mode.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-05.poster.jpg" alt="Embedded browser and Design Mode" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### GitHub &amp; Linear, Native
-
-Browse PRs, issues, and project boards in-app — open a worktree from any task and review without a context switch.
-
-[Docs →](https://www.onorca.dev/docs/review/linear)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/review/linear"><picture><source srcset="resources/onboarding/feature-wall/tile-03.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-03.poster.jpg" alt="GitHub and Linear task workflows in Orca" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### SSH Worktrees
-
-Run agents on a beefy remote box with full file editing, git, and terminals — auto-reconnect and port forwarding included.
-
-[Docs →](https://www.onorca.dev/docs/ssh)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/ssh"><picture><source srcset="resources/onboarding/feature-wall/tile-06.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-06.poster.jpg" alt="Remote worktrees over SSH" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Annotate AI Diffs
-
-Drop comments on any diff line and ship them back to the agent — review, edit, and commit without leaving Orca.
-
-[Docs →](https://www.onorca.dev/docs/review/annotate-ai-diff)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/review/annotate-ai-diff"><picture><source srcset="docs/site/public/docs/annotate-ai-diff.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-08.poster.jpg" alt="Annotate AI-generated diffs" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Drag Files to Agents
-
-VS Code's editor with autosave everywhere — drag files or images straight into an agent prompt.
-
-[Docs →](https://www.onorca.dev/docs/editing/file-explorer)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/editing/file-explorer"><picture><source srcset="resources/onboarding/feature-wall/tile-07.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-07.poster.jpg" alt="Drag files and images into an agent prompt" width="100%" /></picture></a>
-</td>
-</tr>
-<tr>
-<td width="50%" valign="middle">
-
-### Orca CLI
-
-Agents drive Orca too — script every workflow with `orca worktree create`, `snapshot`, `click`, and `fill`.
-
-[Docs →](https://www.onorca.dev/docs/cli/overview)
-
-</td>
-<td width="50%">
-  <a href="https://www.onorca.dev/docs/cli/overview"><picture><source srcset="resources/onboarding/feature-wall/tile-09.gif" type="image/gif"><img src="resources/onboarding/feature-wall/tile-09.poster.jpg" alt="Script Orca from the CLI" width="100%" /></picture></a>
-</td>
-</tr>
-</table>
-
-**Also in the box:**
-
-- **[Quick open](https://www.onorca.dev/docs/model/quick-open)** — Search across worktrees, files, agents, commands, and repo context without leaving your flow.
-- **[Account switcher &amp; usage tracking](https://www.onorca.dev/docs/agents/usage-tracking)** — See Claude and Codex usage and rate-limit resets, and hot-swap accounts without re-logging in.
-- **[Rich repo previews](https://www.onorca.dev/docs/editing/markdown)** — Preview Markdown, images, PDFs, and repo docs in the workspace.
-- **[Computer Use](https://www.onorca.dev/docs/cli/computer-use)** — Let agents operate desktop apps and visible UI when a workflow needs real interaction.
-- **[Notifications and unread state](https://www.onorca.dev/docs/notifications)** — Know when an agent finishes or needs attention, then mark threads unread to come back later.
-- **And many, many more** — we ship daily, so this list is perpetually behind. The [changelog](https://github.com/stablyai/orca/releases) is the real feature list.
+> **How to read this page / 怎么读这页**
+> English first, then the same content in Chinese — not a summary, not a separate half. Tables keep both languages in one cell.
+> 每段英文在前、同一内容的中文紧跟在后；不是摘要，也没有单独的"中文版"。表格把两种语言放进同一格。
 
 ---
 
-## Supported Agents
+## At a glance · 一眼看懂
 
-Works with **any CLI agent** — if it runs in a terminal, it runs in Orca.
+| | |
+|---|---|
+| **Problem<br/>问题** | Forking a large Electron app drifts immediately: upstream updates, your data, your credentials and your dev profile all land in the same places.<br/>二开一个大型 Electron 应用会立刻漂移：上游更新、你的数据、你的凭据、你的开发 profile 全落在同一处。 |
+| **Fix<br/>做法** | A pinned baseline (v1.4.206, one commit SHA) plus a dedicated dev entry that keeps state inside the worktree and refuses the unverified preview path.<br/>固定基线（v1.4.206，一个提交 SHA），加上专用开发入口：状态留在工作树内，明确拒绝未验证的 preview 路径。 |
+| **Cost<br/>代价** | Node 24, pnpm 12.0.0, and Visual Studio C++ build tools — the native module build fails without them.<br/>Node 24、pnpm 12.0.0，以及 Visual Studio C++ 构建工具——没有它原生模块编译不过。 |
+| **Not<br/>不是** | Not a working app yet, not a rebranded release, not a new execution kernel.<br/>还不是能用的应用，不是已换牌的发行版，也不是新的执行内核。 |
 
-<p>
-  <a href="https://docs.anthropic.com/claude/docs/claude-code"><kbd><img src="docs/assets/claude-logo.svg" alt="Claude Code logo" width="16" valign="middle" /> Claude Code</kbd></a> &nbsp;
-  <a href="https://github.com/openai/codex"><kbd><img src="https://www.google.com/s2/favicons?domain=openai.com&sz=64" alt="Codex logo" width="16" valign="middle" /> Codex</kbd></a> &nbsp;
-  <a href="https://x.ai/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=x.ai&sz=64" alt="Grok logo" width="16" valign="middle" /> Grok</kbd></a> &nbsp;
-  <a href="https://cursor.com/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=cursor.com&sz=64" alt="Cursor logo" width="16" valign="middle" /> Cursor</kbd></a> &nbsp;
-  <a href="https://docs.github.com/en/copilot/how-tos/set-up/install-copilot-cli"><kbd><img src="https://www.google.com/s2/favicons?domain=github.com&sz=64" alt="GitHub Copilot logo" width="16" valign="middle" /> GitHub Copilot</kbd></a> &nbsp;
-  <a href="https://opencode.ai/docs/cli/"><kbd><img src="https://www.google.com/s2/favicons?domain=opencode.ai&sz=64" alt="OpenCode logo" width="16" valign="middle" /> OpenCode</kbd></a> &nbsp;
-  <a href="https://mimo.xiaomi.com/coder"><kbd><img src="https://www.google.com/s2/favicons?domain=mimo.xiaomi.com&sz=64" alt="MiMo Code logo" width="16" valign="middle" /> MiMo Code</kbd></a> &nbsp;
-  <a href="https://ampcode.com/manual#install"><kbd><img src="https://www.google.com/s2/favicons?domain=ampcode.com&sz=64" alt="Amp logo" width="16" valign="middle" /> Amp</kbd></a> &nbsp;
-  <a href="https://openclaude.gitlawb.com/"><kbd><img src="resources/openclaude-logo.png" alt="OpenClaude logo" width="16" valign="middle" /> OpenClaude</kbd></a> &nbsp;
-  <a href="https://antigravity.google/docs/cli-overview"><kbd><img src="https://www.google.com/s2/favicons?domain=antigravity.google&sz=64" alt="Antigravity logo" width="16" valign="middle" /> Antigravity</kbd></a> &nbsp;
-  <a href="https://pi.dev"><kbd><img src="https://pi.dev/favicon.svg" alt="Pi logo" width="16" valign="middle" /> Pi</kbd></a> &nbsp;
-  <a href="https://omp.sh"><kbd><img src="https://omp.sh/favicon.svg" alt="oh-my-pi logo" width="16" valign="middle" /> oh-my-pi</kbd></a> &nbsp;
-  <a href="https://hermes-agent.nousresearch.com/docs/"><kbd><img src="https://www.google.com/s2/favicons?domain=nousresearch.com&sz=64" alt="Hermes Agent logo" width="16" valign="middle" /> Hermes Agent</kbd></a> &nbsp;
-  <a href="https://devin.ai/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=devin.ai&sz=64" alt="Devin logo" width="16" valign="middle" /> Devin</kbd></a> &nbsp;
-  <a href="https://block.github.io/goose/docs/quickstart/"><kbd><img src="https://www.google.com/s2/favicons?domain=goose-docs.ai&sz=64" alt="Goose logo" width="16" valign="middle" /> Goose</kbd></a> &nbsp;
-  <a href="https://docs.augmentcode.com/cli/overview"><kbd><img src="https://www.google.com/s2/favicons?domain=augmentcode.com&sz=64" alt="Auggie logo" width="16" valign="middle" /> Auggie</kbd></a> &nbsp;
-  <a href="https://github.com/autohandai/code-cli"><kbd><img src="https://www.google.com/s2/favicons?domain=autohand.ai&sz=64" alt="Autohand Code logo" width="16" valign="middle" /> Autohand Code</kbd></a> &nbsp;
-  <a href="https://github.com/charmbracelet/crush"><kbd><img src="https://www.google.com/s2/favicons?domain=charm.sh&sz=64" alt="Charm logo" width="16" valign="middle" /> Charm</kbd></a> &nbsp;
-  <a href="https://docs.cline.bot/cline-cli/overview"><kbd><img src="https://www.google.com/s2/favicons?domain=cline.bot&sz=64" alt="Cline logo" width="16" valign="middle" /> Cline</kbd></a> &nbsp;
-  <a href="https://www.codebuff.com/docs/help/quick-start"><kbd><img src="https://www.google.com/s2/favicons?domain=codebuff.com&sz=64" alt="Codebuff logo" width="16" valign="middle" /> Codebuff</kbd></a> &nbsp;
-  <a href="https://commandcode.ai/docs/quickstart"><kbd><img src="https://www.google.com/s2/favicons?domain=commandcode.ai&sz=64" alt="Command Code logo" width="16" valign="middle" /> Command Code</kbd></a> &nbsp;
-  <a href="https://docs.continue.dev/guides/cli"><kbd><img src="https://www.google.com/s2/favicons?domain=continue.dev&sz=64" alt="Continue logo" width="16" valign="middle" /> Continue</kbd></a> &nbsp;
-  <a href="https://docs.factory.ai/cli/getting-started/quickstart"><kbd><img src="docs/assets/droid-logo.svg" alt="Droid logo" width="16" valign="middle" /> Droid</kbd></a> &nbsp;
-  <a href="https://kilo.ai/docs/cli"><kbd><img src="https://raw.githubusercontent.com/Kilo-Org/kilocode/main/packages/kilo-vscode/assets/icons/kilo-light.svg" alt="Kilocode logo" width="16" valign="middle" /> Kilocode</kbd></a> &nbsp;
-  <a href="https://www.kimi.com/code/docs/en/kimi-code-cli/getting-started.html"><kbd><img src="https://www.google.com/s2/favicons?domain=moonshot.cn&sz=64" alt="Kimi logo" width="16" valign="middle" /> Kimi</kbd></a> &nbsp;
-  <a href="https://kiro.dev/docs/cli/"><kbd><img src="https://www.google.com/s2/favicons?domain=kiro.dev&sz=64" alt="Kiro logo" width="16" valign="middle" /> Kiro</kbd></a> &nbsp;
-  <a href="https://github.com/mistralai/mistral-vibe"><kbd><img src="https://www.google.com/s2/favicons?domain=mistral.ai&sz=64" alt="Mistral Vibe logo" width="16" valign="middle" /> Mistral Vibe</kbd></a> &nbsp;
-  <a href="https://github.com/QwenLM/qwen-code"><kbd><img src="https://www.google.com/s2/favicons?domain=qwenlm.github.io&sz=64" alt="Qwen Code logo" width="16" valign="middle" /> Qwen Code</kbd></a> &nbsp;
-  <a href="https://support.atlassian.com/rovo/docs/install-and-run-rovo-dev-cli-on-your-device/"><kbd><img src="https://www.google.com/s2/favicons?domain=atlassian.com&sz=64" alt="Rovo Dev logo" width="16" valign="middle" /> Rovo Dev</kbd></a> &nbsp;
-  <kbd>+ any CLI agent</kbd>
-</p>
+## What this is · 这是什么
 
----
+A fork of Orca that keeps upstream's Electron + TypeScript + React stack and changes the product above it: brand, navigation, interface, then contest features. The baseline is pinned to **v1.4.206** at commit `c62eca3988ce4d7fce12fbfd20c0c47b39e9ecac`, imported as a fixed archive (29,094 entries) rather than merging `main`.
 
-## Install
+一个 Orca 分支，保留上游的 Electron + TypeScript + React 栈，改它上面的产品层：品牌、导航、界面，然后是比赛功能。基线固定在 **v1.4.206**、提交 `c62eca3988ce4d7fce12fbfd20c0c47b39e9ecac`，以固定归档导入（29,094 条目），不是合并 `main`。
 
-### Desktop — macOS, Windows, Linux
+| Branch · 分支 | Role · 作用 |
+|---|---|
+| `upstream-baseline/v1.4.206` | Read-only reference copy of the pinned baseline.<br/>固定基线的只读参考副本。 |
+| `init/project-isolation` | The development branch — isolation hardening, dev entry, targeted tests.<br/>开发分支——隔离加固、开发入口、针对性测试。 |
 
-- **[Download from onOrca.dev](https://onorca.dev/download)**
-- Or grab a build directly: [macOS Apple Silicon](https://github.com/stablyai/orca/releases/latest/download/orca-macos-arm64.dmg) · [macOS Intel](https://github.com/stablyai/orca/releases/latest/download/orca-macos-x64.dmg) · [Windows (.exe)](https://github.com/stablyai/orca/releases/latest/download/orca-windows-setup.exe) · [Linux AppImage](https://github.com/stablyai/orca/releases/latest/download/orca-linux.AppImage) · [All builds](https://github.com/stablyai/orca/releases/latest)
-- Running `orca serve` on a headless Linux server? See the [headless Linux server guide](docs/reference/headless-linux-server.md).
+This is not a rewrite of the execution kernel. Terminal, editor, diff and preview stay upstream components; the rework is expected to reach them through a new interface instead of replacing them.
 
-_Or via a package manager:_
+这不是重写执行内核。终端、编辑器、Diff 与预览仍是上游组件；重构后的界面要能走到它们，而不是把它们替换掉。
 
-```bash
-# macOS (Homebrew)
-brew install --cask stablyai/orca/orca
+## The plan · 五步
 
-# Arch Linux (AUR) — or stably-orca-git to build from source
-yay -S stably-orca-bin
+| Step · 步骤 | What it means · 做什么 | State · 状态 |
+|---|---|---|
+| 1. Clean base<br/>干净基座 | Separate directory, isolation of app identity / data / instances / CLI / update channel, first isolated launch.<br/>独立目录，隔离应用标识、数据、实例、CLI 与更新来源，做首次隔离启动。 | In progress — static checks pass, first launch NOT_RUN.<br/>进行中——静态检查通过，首次启动未运行。 |
+| 2. Replace the brand<br/>替换品牌 | Logo, icons, wordmark, name and promo entries across UI and packages; keep LICENSE and upstream credits.<br/>界面与安装包里的 Logo、图标、字标、名称与推广入口；保留 LICENSE 与上游署名。 | Not started.<br/>未开始。 |
+| 3. Rebuild the interface<br/>重构界面 | Navigation, home, session panels, layout, settings, loading/empty/error states, at 1080p and 720p.<br/>导航、首页、会话面板、布局、设置、加载/空/错误状态，检查 1080p 与 720p。 | Not started.<br/>未开始。 |
+| 4. Prove features survive<br/>证明功能保留 | Before/after results for project, worktree, agent lifecycle, terminal I/O, edit/save, git diff, preview.<br/>项目、worktree、Agent 生命周期、终端输入输出、编辑保存、git diff、预览的前后对照。 | Not started.<br/>未开始。 |
+| 5. Contest loop<br/>比赛闭环 | Task/evidence, independent review, built-in graph, failure relay, controlled retrieval.<br/>真实任务与证据、独立复核、内置 Graph、失败接力、受控检索。 | Not started.<br/>未开始。 |
+
+## Verified so far · 目前验证到什么程度
+
+Everything below was run on 2026-09-21 and recorded in [STATUS.md](STATUS.md). The honest summary: static checks and unit tests pass; nothing has been launched.
+
+下面这些都在 2026-09-21 跑过，记录在 [STATUS.md](STATUS.md)。诚实概括：静态检查与单元测试通过；应用从未启动。
+
+| Check · 检查 | Result · 结果 |
+|---|---|
+| `pnpm install --frozen-lockfile` | **FAIL** — `native/windows-registry` needs `node-gyp`; no Visual Studio installation found.<br/>**失败**——`native/windows-registry` 需要 `node-gyp`；未找到 Visual Studio。 |
+| Same install with `--ignore-scripts --offline` | PASS, 1,283 packages reused — restores static-check deps only; skipping scripts does not mean a working native runtime.<br/>通过，复用 1,283 个包——只恢复静态检查依赖；跳过脚本不代表原生运行环境可用。 |
+| `node config/scripts/agent-graph-dev.mjs --check-isolation` | PASS — paths stay inside the dev worktree.<br/>通过——路径都在开发工作树内。 |
+| `vitest run` over 8 isolation-related files | PASS, 86 tests.<br/>通过，86 项测试。 |
+| `tsc --noEmit -p config/tsconfig.node.json` | PASS.<br/>通过。 |
+| Install → launch → open a test repo → terminal/agent/worktree smoke → restart | **NOT_RUN** — blocked on the C++ build tools.<br/>**未运行**——卡在 C++ 构建工具。 |
+
+## Quickstart · 快速开始
+
+### Requirements · 环境要求
+
+Node **24** and pnpm **12.0.0** (declared in `package.json`), plus Visual Studio C++ build tools for the native modules.
+
+Node **24** 与 pnpm **12.0.0**（见 `package.json`），以及编译原生模块用的 Visual Studio C++ 构建工具。
+
+### 1. Install dependencies · 安装依赖
+
+```powershell
+pnpm install --frozen-lockfile
 ```
 
-### Mobile Companion — iOS, Android
+On a machine without the C++ toolchain this fails at `native/windows-registry`. Adding `--ignore-scripts --offline` gets you static checks only — do not treat that as a working install.
 
-Pair with your desktop app to monitor and steer your agents from your phone.
+在没有 C++ 工具链的机器上，这一步会在 `native/windows-registry` 失败。加 `--ignore-scripts --offline` 只能拿到静态检查能力——不要把那个当成本地能跑。
 
-- **iOS:** [Download on the App Store](https://apps.apple.com/us/app/orca-ide/id6766130217) or [join TestFlight](https://testflight.apple.com/join/YjeGMQBA)
-- **Android:** [Download APK 0.0.50](https://github.com/stablyai/orca/releases/download/mobile-android-v0.0.50/app-release.apk) · [Install guide](https://www.onorca.dev/docs/android-apk)
+### 2. Check the dev isolation · 检查开发隔离
 
----
+```powershell
+node config/scripts/agent-graph-dev.mjs --check-isolation
+```
 
-## Community &amp; Support
+### 3. Start the dev session · 启动开发会话
 
-- **Discord:** Join the community on **[Discord](https://discord.gg/fzjDKHxv8Q)**.
-- **Twitter / X:** Follow **[@orca_build](https://x.com/orca_build)** for updates and announcements.
-- **WeChat:** Scan to join the Orca community WeChat group 8. Group 8 may be full; if so, scan the Group 9 QR code instead.
+```powershell
+pnpm dev              # dedicated entry · 专用入口
+pnpm dev-stable-name  # stable app name for UI comparison · 稳定应用名，便于界面对照
+```
 
-  <img src="docs/assets/wechat-qr-group8.jpg" alt="WeChat group 8 QR code for the Orca community" width="160" />&nbsp;&nbsp;<img src="docs/assets/wechat-qr-group9.jpg" alt="WeChat group 9 QR code for the Orca community" width="160" />
+`pnpm start` refuses the built preview on purpose: it has not been verified. The dev entry keeps state in `.agent-graph/dev/{home,user-data}` inside the worktree and clears inherited Orca routes, provider data roots and credential variables.
 
-- **Feedback &amp; Ideas:** We ship fast. Missing something? [Request a new feature](https://github.com/stablyai/orca/issues).
-- **Privacy:** See the [privacy &amp; telemetry docs](https://www.onorca.dev/docs/telemetry) for what anonymous usage data Orca collects and how to opt out.
-- **Show Support:** [Star](https://github.com/stablyai/orca) this repo to follow along with our daily ships.
+`pnpm start` 会明确拒绝未验证的 built preview。开发入口把状态放在工作树内的 `.agent-graph/dev/{home,user-data}`，并清理继承来的 Orca 路由、provider 数据根与凭据变量。
 
----
+## Documentation · 文档
 
-## Developing
+| Doc · 文档 | Read it when · 什么场景读它 |
+|---|---|
+| [AGENT_GRAPH.md](AGENT_GRAPH.md) | You need the development brief: baseline, steps, acceptance rules.<br/>需要开发主提示词：基线、步骤、验收规则。 |
+| [STATUS.md](STATUS.md) | You need the exact evidence and the current blocker.<br/>需要确切证据与当前阻塞。 |
+| [AGENTS.md](AGENTS.md) | You are editing code and need the repository rules.<br/>改代码时需要仓库规则。 |
+| [.github/CONTRIBUTING.md](.github/CONTRIBUTING.md) | You want the local setup and PR checklist inherited from upstream.<br/>需要继承自上游的本地安装与 PR 检查项。 |
+| [cloud/README.md](cloud/README.md) | You are working on the mobile pairing relay.<br/>要动手机配对中继。 |
+| [docs/STYLEGUIDE.md](docs/STYLEGUIDE.md) | You are touching UI tokens and components.<br/>要改 UI token 与组件。 |
 
-Want to contribute or run locally? See our [CONTRIBUTING.md](.github/CONTRIBUTING.md) guide.
+## Repository layout · 仓库结构
 
-The relay that pairs the mobile app with a desktop host is also in this repository under
-[`cloud/`](cloud/README.md), with a separate pnpm workspace and setup guide.
+```text
+Agent-Graph/
+├── src/
+│   ├── main/            # Electron main process
+│   ├── renderer/        # React UI (to be reworked)
+│   ├── cli/             # `orca` CLI
+│   ├── shared/          # cross-process contracts
+│   ├── relay/           # mobile pairing relay
+│   └── mobile-web/      # companion web surface
+├── cloud/               # relay deployment, separate pnpm workspace
+├── config/scripts/      # agent-graph-dev.mjs and the check scripts
+├── docs/                # assets, readme translations, reference, audits
+├── tests/               # Playwright e2e specs
+├── mobile/              # separate workspace for the companion app
+├── native/              # native modules — needs a C++ toolchain
+└── .github/workflows/   # 66 workflow files inherited from upstream
+```
 
-<a href="https://github.com/stablyai/orca/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=stablyai/orca" alt="Orca contributors" />
-</a>
+## Status · 状态
 
-<p align="center">
-  <img src="docs/assets/star-history.png" alt="GitHub star history chart for stablyai/orca" width="880" />
-</p>
+Version **1.4.206** is the baseline's version, not a shipped Agent Graph release. The development branch has one hardening commit on top of the imported baseline.
 
-## Signed Builds
+版本 **1.4.206** 是基线的版本，不是 Agent Graph 的发行版本。开发分支在导入的基线之上只有一个加固提交。
 
-Windows code signing sponored/provided by [SignPath.io](https://signpath.io), certificate by [SignPath Foundation](https://signpath.org).
+Known limits, stated rather than hidden:
 
-## License
+- Full `pnpm install`, Electron launch, runtime isolation, opening a test repo, terminal/agent/worktree smoke, and quit/restart are all **NOT_RUN**, not "assumed working".
+- The blocker is environmental and needs a system-level change: Visual Studio C++ build tools are not installed on the development machine.
+- No screenshots exist, so no claim about interface quality is made here.
+- The dev-profile isolation is not an OS filesystem sandbox; it is a separate profile plus entry guards.
+- The 66 workflow files are inherited from upstream; this page does not claim they run green on this branch.
 
-Orca is free and open source under the [MIT License](LICENSE).
+边界写出来而不是藏起来：
+
+- 完整 `pnpm install`、Electron 启动、运行期隔离、打开测试仓库、终端/Agent/worktree 冒烟、退出与重启，全部是 **未运行**，而不是"默认可以"。
+- 阻塞是环境性的，需要系统级改动：开发机没有安装 Visual Studio C++ 构建工具。
+- 没有任何截图，所以这里不对界面质量作任何断言。
+- 开发 profile 的隔离不是操作系统文件沙箱；它是独立 profile 加入口守卫。
+- 66 个工作流文件继承自上游；这页不断言它们在本分支上是通过的。
+
+## License · 许可
+
+MIT © 2026 Lovecast Inc. — inherited from [Orca](https://github.com/stablyai/orca) together with upstream credits. See [LICENSE](LICENSE).
+
+MIT © 2026 Lovecast Inc. —— 与上游署名一起继承自 [Orca](https://github.com/stablyai/orca)。见 [LICENSE](LICENSE)。
